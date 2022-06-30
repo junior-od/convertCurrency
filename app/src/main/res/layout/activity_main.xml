@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginVertical="20dp"
+            android:text="@string/currency_converter"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+
+            />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/amount"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@+id/title"
+            android:inputType="number"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="10dp"
+            android:hint="@string/enter_amount"
+            android:textColor="@color/black" />
+
+        <LinearLayout
+            android:layout_below="@+id/amount"
+            android:id="@+id/filter"
+            android:weightSum="1"
+            android:baselineAligned="false"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:orientation="vertical"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="5dp"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/from"
+                    />
+
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/fromCurrencySpinner"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:entries="@array/currency_codes"
+                    android:padding="15dp"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:orientation="vertical"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="20dp"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/to"
+                    />
+
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/toCurrencySpinner"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:entries="@array/currency_codes"
+                    android:padding="15dp"
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <Button
+            android:layout_below="@+id/filter"
+            android:id="@+id/convertButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/convert"
+            android:layout_marginVertical="20dp"
+            android:layout_centerHorizontal="true"
+            android:background="@color/black"
+            />
+
+        <ProgressBar
+            android:visibility="gone"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/convertButton"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:id="@+id/progressResult" />
+
+        <TextView
+            android:id="@+id/conversionResult"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            tools:text="10 CAD = 500 GBP"
+            android:layout_below="@id/convertButton"/>
+
+    </RelativeLayout>
+</layout>
