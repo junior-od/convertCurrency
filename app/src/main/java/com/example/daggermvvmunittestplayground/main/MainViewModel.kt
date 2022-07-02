@@ -1,5 +1,6 @@
 package com.example.daggermvvmunittestplayground.main
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.daggermvvmunittestplayground.commons.NetworkResource
@@ -43,20 +44,28 @@ class MainViewModel @Inject constructor(
         viewModelScope.launch(dispatchers.io) {
             _convert.value = CurrencyEvent.Loading
             when (val res = repository.getCurrencyRates(fromCurrency)) {
-                is NetworkResource.Error -> _convert.value = CurrencyEvent.Error(res.message!!)
-                is NetworkResource.Success -> {
-                    val rates = res.data!!.rates
-                    val rate = getRateForCurrency(toCurrency, rates)
-
-                    if (rate == null) {
-                        _convert.value = CurrencyEvent.Error("Unexpected Error")
-                    } else {
-                        val convertedValue = (floatAmount * rate)
-
-                        _convert.value = CurrencyEvent.Success(
-                            "$amount $fromCurrency = $convertedValue $toCurrency"
-                        )
+                is NetworkResource.Error -> {
+                    res.message?.let {
+                        _convert.value = CurrencyEvent.Error(it)
                     }
+
+                }
+                is NetworkResource.Success -> {
+                    res.data?.let {
+                        val rates = it.rates
+                        val rate = getRateForCurrency(toCurrency, rates)
+
+                        if (rate == null) {
+                            _convert.value = CurrencyEvent.Error("Unexpected Error")
+                        } else {
+                            val convertedValue = (floatAmount * rate)
+
+                            _convert.value = CurrencyEvent.Success(
+                                "$amount $fromCurrency = $convertedValue $toCurrency"
+                            )
+                        }
+                    }
+
                 }
             }
         }

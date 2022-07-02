@@ -1,7 +1,6 @@
 package com.example.daggermvvmunittestplayground
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -10,7 +9,7 @@ import com.example.daggermvvmunittestplayground.databinding.ActivityMainBinding
 import com.example.daggermvvmunittestplayground.main.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
+@AndroidEntryPoint //entry point annotation to be able to inject dependency in activities and fragments
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
