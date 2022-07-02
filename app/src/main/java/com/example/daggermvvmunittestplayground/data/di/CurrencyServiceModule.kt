@@ -14,8 +14,8 @@ import okhttp3.Dispatcher
 import retrofit2.Retrofit
 import javax.inject.Singleton
 
-@Module
-@InstallIn(SingletonComponent::class)
+@Module //is a container
+@InstallIn(SingletonComponent::class) //live as long as the component meaning specified
 object CurrencyServiceModule {
 
     @Singleton
@@ -23,8 +23,8 @@ object CurrencyServiceModule {
     fun provideCurrencyApi(retrofit: Retrofit) : CurrencyApi =
         retrofit.create(CurrencyApi::class.java)
 
-    @Singleton
-    @Provides
+    @Singleton //means single instance
+    @Provides //provide the instance so we can inject it
     fun provideMainRepository(api: CurrencyApi): MainRepository = DefaultMainRepository(api)
 
     @Singleton

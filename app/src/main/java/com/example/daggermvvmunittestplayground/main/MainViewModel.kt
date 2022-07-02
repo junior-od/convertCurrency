@@ -10,7 +10,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import kotlin.math.roundToLong
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
@@ -52,7 +51,7 @@ class MainViewModel @Inject constructor(
                     if (rate == null) {
                         _convert.value = CurrencyEvent.Error("Unexpected Error")
                     } else {
-                        val convertedValue = (floatAmount * rate * 100).roundToLong() / 100
+                        val convertedValue = (floatAmount * rate)
 
                         _convert.value = CurrencyEvent.Success(
                             "$amount $fromCurrency = $convertedValue $toCurrency"
